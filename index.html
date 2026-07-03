@@ -3,21 +3,20 @@
 <head>
   <style>
     body {
-      background-color: transparent; /* Ginawang transparent para sumama sa kulay ng header mo */
+      background-color: #1e222b; /* Dark background para bumagay sa menu mo */
       color: #92a4b8;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
-      padding: 0; /* Tinanggal ang 10px padding para walang space sa paligid */
+      padding: 10px;
       display: flex;
       align-items: center;
-      font-size: 11px; /* Pinaliit mula 14px para magkasya sa maliit na box */
-      overflow: hidden; /* Tinanggal ang posibilidad na magka-scrollbar */
+      font-size: 14px;
     }
     .time-label {
-      margin-right: 4px;
+      margin-right: 6px;
     }
     .live-time {
-      color: #ffcc00;
+      color: #ffcc00; /* Yellow text katulad ng sa sample mo */
       font-weight: bold;
     }
   </style>
@@ -32,6 +31,8 @@
   <script>
     function updateClock() {
       var now = new Date();
+      
+      // I-convert ang oras sa Philippine Time Zone (PST)
       var options = { 
         timeZone: 'Asia/Manila', 
         weekday: 'short', 
@@ -47,6 +48,7 @@
       var formatter = new Intl.DateTimeFormat('en-US', options);
       var parts = formatter.formatToParts(now);
       
+      // Pag-aayos ng format: "Mon, Jun 22, 2026, 03:00:09 PM (PST)"
       var weekday = parts.find(p => p.type === 'weekday').value;
       var month = parts.find(p => p.type === 'month').value;
       var day = parts.find(p => p.type === 'day').value;
@@ -57,9 +59,11 @@
       var dayPeriod = parts.find(p => p.type === 'dayPeriod').value;
       
       var formattedString = weekday + ", " + month + " " + day + ", " + year + ", " + hour + ":" + minute + ":" + second + " " + dayPeriod + " (PST)";
+      
       document.getElementById('pst-clock').innerHTML = formattedString;
     }
 
+    // Patakbuhin ang clock agad-agad at i-update bawat 1 segundo
     updateClock();
     setInterval(updateClock, 1000);
   </script>
