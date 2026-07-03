@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      background-color: #1e222b; /* Dark background para bumagay sa menu mo */
+      color: #92a4b8;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+    }
+    .time-label {
+      margin-right: 6px;
+    }
+    .live-time {
+      color: #ffcc00; /* Yellow text katulad ng sa sample mo */
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div>
+    <span class="time-label">Philippine Standard Time:</span>
+    <span id="pst-clock" class="live-time">Loading...</span>
+  </div>
+
+  <script>
+    function updateClock() {
+      var now = new Date();
+      
+      // I-convert ang oras sa Philippine Time Zone (PST)
+      var options = { 
+        timeZone: 'Asia/Manila', 
+        weekday: 'short', 
+        year: 'numeric', 
+        month: 'short', 
+        day: '2-digit', 
+        hour: '2-digit', 
+        minute: '2-digit', 
+        second: '2-digit', 
+        hour12: true 
+      };
+      
+      var formatter = new Intl.DateTimeFormat('en-US', options);
+      var parts = formatter.formatToParts(now);
+      
+      // Pag-aayos ng format: "Mon, Jun 22, 2026, 03:00:09 PM (PST)"
+      var weekday = parts.find(p => p.type === 'weekday').value;
+      var month = parts.find(p => p.type === 'month').value;
+      var day = parts.find(p => p.type === 'day').value;
+      var year = parts.find(p => p.type === 'year').value;
+      var hour = parts.find(p => p.type === 'hour').value;
+      var minute = parts.find(p => p.type === 'minute').value;
+      var second = parts.find(p => p.type === 'second').value;
+      var dayPeriod = parts.find(p => p.type === 'dayPeriod').value;
+      
+      var formattedString = weekday + ", " + month + " " + day + ", " + year + ", " + hour + ":" + minute + ":" + second + " " + dayPeriod + " (PST)";
+      
+      document.getElementById('pst-clock').innerHTML = formattedString;
+    }
+
+    // Patakbuhin ang clock agad-agad at i-update bawat 1 segundo
+    updateClock();
+    setInterval(updateClock, 1000);
+  </script>
+
+</body>
+</html>
