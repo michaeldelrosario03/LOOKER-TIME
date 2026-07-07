@@ -1,0 +1,21 @@
+{
+  "name": "GitHub Clock Component",
+  "organization": "My Org",
+  "description": "A custom clock component for Looker Studio",
+  "logoUrl": "",
+  "companyUrl": "https://github.com",
+  "supportUrl": "https://github.com",
+  "components": [
+    {
+      "id": "githubClock",
+      "name": "Live Clock",
+      "description": "Displays Philippine Standard Time",
+      "iconUrl": "",
+      "resource": {
+        "js": "",
+        "config": "manifest.json"
+      }
+    }
+  ],
+  "devMode": true
+}
